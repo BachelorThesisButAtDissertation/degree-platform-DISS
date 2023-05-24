@@ -9,15 +9,12 @@ import {
     Uploader,
 } from 'rsuite';
 import ImageIcon from '@rsuite/icons/Image';
-import Textarea from '../basics/Textarea';
 
 import styles from '../../styles/student/Setup.module.css';
 import DOMAINS from '../../utils/domains.json';
 import ROLES from '../../utils/roles.json';
 import { getImageURL, uploadFileForUser } from '../../lib/storage/storageFunc';
 import {
-    createStudentInDB,
-    saveStudentInDB,
     updateProfileData,
 } from '../../lib/user/userFunc';
 import { createTeacherInDB } from '../../lib/db/teacherDB';
@@ -30,7 +27,6 @@ const SetupTeacher = ({ userId, endSetupMode }) => {
         address: '',
         role: '',
         website: '',
-        address: '',
     });
     const [uploading, setUploading] = useState(false);
     console.log(userId);
@@ -50,7 +46,7 @@ const SetupTeacher = ({ userId, endSetupMode }) => {
                     {
                         name: data.blobFile.name,
                         fileKey: data.blobFile.name,
-                        url: url,
+                        url,
                     },
                 ],
             });
@@ -97,8 +93,8 @@ const SetupTeacher = ({ userId, endSetupMode }) => {
                             listType='picture'
                             action=''
                             className={'imageBoxUploader'}
-                            onSelect={handleProfilePicture}
-                            accept='application/pdf, image/png, image/jpeg'
+                            onUpload={handleProfilePicture}
+                            accept='image/png, image/jpeg'
                         >
                             <div>
                                 {uploading && <Loader backdrop center />}

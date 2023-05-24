@@ -24,8 +24,8 @@ const MyCollabs = ({ userId, setActiveChat }) => {
         setTasks(
             tks.map((t) => ({
                 ...t,
-                dueDate: new Date(t.duedate).toDateString(),
-                done: t.done ? 'Done' : 'Unfinished',
+                dueDate: new Date(t.dueDate).toDateString(),
+                done: t.status ? 'Done' : 'Unfinished',
             }))
         );
     };
@@ -61,12 +61,12 @@ const MyCollabs = ({ userId, setActiveChat }) => {
     const uploadFile = async (file) => {
         setFile({
             status: 'uploading',
-            file: file.blob,
+            file: {name: file.name},
         });
         await uploadCollabFile(userId, collab.id, file.blobFile);
         setFile({
             status: 'done',
-            file: file.blob,
+            file: {name: file.name},
         });
     };
 
@@ -130,7 +130,7 @@ const MyCollabs = ({ userId, setActiveChat }) => {
 
                 <Table.Column width={450}>
                     <Table.HeaderCell>Body</Table.HeaderCell>
-                    <Table.Cell dataKey='message' />
+                    <Table.Cell dataKey='body' />
                 </Table.Column>
 
                 <Table.Column width={130}>

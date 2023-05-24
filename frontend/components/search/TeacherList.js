@@ -5,7 +5,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { searchTeachers } from '../../lib/db/teacherDB';
 import DOMAINS from '../../utils/domains.json';
 import { getActiveSeasonsImIn } from '../../lib/admin/adminFunc';
-import { getUserData } from '../../lib/user/userFunc';
+import {getUserData, TYPES} from '../../lib/user/userFunc';
 
 const TeacherList = ({ userId, setActiveChat }) => {
     const [teachers, setTeachers] = useState();
@@ -64,7 +64,7 @@ const TeacherList = ({ userId, setActiveChat }) => {
         localStorage.setItem('userData', JSON.stringify(udat));
         _setFu(Date.now());
     };
-    
+
     return (
         <>
             <div className={styles.pageTitle}>
@@ -116,6 +116,7 @@ const TeacherList = ({ userId, setActiveChat }) => {
                         canRequest={!hasActiveCollab && openSeason && !cooldown}
                         fupd={resetPage}
                         seasons={seasons}
+                        mode={TYPES.STUDENT}
                     />
                 ))}
             </div>

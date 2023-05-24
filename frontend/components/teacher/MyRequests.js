@@ -29,7 +29,7 @@ const ActionCell = ({ rowData, callBack }) => {
             default:
                 toaster.push(
                     <Message type='error'>
-                        Request {rowData.id} was accepted.
+                        Request {rowData.id} was rejected.
                     </Message>
                 );
                 return;

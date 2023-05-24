@@ -1,9 +1,8 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import {
     Button,
     ButtonGroup,
-    ButtonToolbar,
     Form,
     Modal,
     Panel,
@@ -14,20 +13,16 @@ import styles from '../../styles/Card.module.css';
 import Textarea from '../basics/Textarea';
 import { requestToTeacher, TYPES } from '../../lib/user/userFunc';
 import { openChat } from '../../lib/chat/chatFunc';
+import {getImageURL} from "../../lib/storage/storageFunc";
 
-const DUMMY_TAGS = [
-    'this is a domain',
-    'this is a domain2',
-    'this is a domain3',
-    'this is a domain4',
-];
 
 const TeacherCard = (props) => {
     const {
+        id,
         displayName,
         available,
         domains,
-        photoURL,
+        photo,
         interests,
         userId,
         setActiveChat,
@@ -45,6 +40,19 @@ const TeacherCard = (props) => {
     const [requestData, setRequestData] = useState({
         message: '',
     });
+
+    const [pictureUrl, setPictureUrl] = useState('');
+
+    useEffect(() => {
+        if(!photo) {
+            return;
+        }
+
+        (async () => {
+            const url = await getImageURL(id, photo);
+            setPictureUrl(url);
+        })();
+    }, [])
 
     const onSubmit = async () => {
         try {
@@ -118,9 +126,13 @@ const TeacherCard = (props) => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <Panel shaded bordered className={styles.card}>
+            <Panel
+              shaded
+              bordered
+              className={styles.card}
+              >
                 <div className={styles.photo}>
-                    <img src={photoURL} height='240' />
+                    <img src={pictureUrl || '/userAvatar.svg'} height='240' />
                 </div>
                 <Panel header={displayName} className={styles.body}>
                     <p className={styles.tags}>
