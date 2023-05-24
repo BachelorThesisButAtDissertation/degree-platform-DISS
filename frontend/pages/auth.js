@@ -86,7 +86,7 @@ const AuthPage = () => {
                 localStorage.setItem('user', JSON.stringify(uc));
                 toaster.push(
                     <Message showIcon type='success'>
-                        Welcome to the platform!
+                        Account created sucessfully! Please log in!
                     </Message>
                 );
                 console.log(auth.currentUser, uc);
@@ -95,10 +95,10 @@ const AuthPage = () => {
                         displayName: fregdata?.name,
                     },
                 })
-                    .then(console.log)
+                    .then(() => console.log('heree'))
                     .catch(console.error);
                 router.push({
-                    pathname: '/',
+                    pathname: '/auth',
                 });
             })
             .catch((err) => {

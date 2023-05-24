@@ -15,7 +15,7 @@ const StudentList = () => {
     const [searchName, setSearchName] = useState('')
 
     const loadStudents = () => {
-        
+        console.log('<< ----- HERE ----- >>');
         getAllStudents(clb)
         .then(async res => {
             let finalRes = []

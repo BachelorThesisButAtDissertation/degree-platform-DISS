@@ -13,6 +13,7 @@ const GET_DATA = {
 
 const AccountLoader = ({ userId, setAccountSetup, mode }) => {
     const loadingAccountData = async () => {
+        console.log('mode ------------------->> ', mode);
         const userData = (await GET_DATA[mode]?.(userId)).data();
         console.log('exists', userData);
         if (!userData) {
@@ -29,6 +30,8 @@ const AccountLoader = ({ userId, setAccountSetup, mode }) => {
         }
         console.log('uid', userId);
     }, [userId]);
+
+    console.log('<< ----- HEREE ----- >>');
 
     return (
         <div className={styles.container}>

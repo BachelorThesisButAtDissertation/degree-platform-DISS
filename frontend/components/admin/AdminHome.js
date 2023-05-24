@@ -15,7 +15,7 @@ import StudentList from './StudentList';
 import { TYPES } from '../../lib/user/userFunc';
 import { useRouter } from 'next/router'
 
-const AdminMode = ({ auth }) => {
+const AdminMode = ({ currentUser }) => {
     const [setupMode, setSetupMode] = useState('unset');
     const [page, setPage] = useState('seasons');
     const [activeChat, setActiveChat] = useState();
@@ -28,23 +28,15 @@ const AdminMode = ({ auth }) => {
         setSetupMode('set');
     };
 
-    console.log(auth);
-
     return (
         <div className={styles.container}>
             {setupMode === 'unset' && (
                 <AccountLoader
-                    userId={auth.currentUser?.uid}
+                    userId={currentUser?.uid}
                     setAccountSetup={setAccountSetup}
                     mode='admins'
                 />
             )}
-            {/* {setupMode === 'setting' && (
-                <SetupTeacher
-                    userId={auth?.currentUser?.uid}
-                    endSetupMode={endSetupMode}
-                />
-            )} */}
 
             {setupMode === 'set' && (
                 <>
@@ -72,7 +64,7 @@ const AdminMode = ({ auth }) => {
                                     <Nav.Item icon={<AdminIcon />}>
                                         Welcome{' '}
                                         {
-                                            auth?.currentUser?.providerData[0]
+                                            currentUser?.providerData[0]
                                                 .displayName
                                         }
                                     </Nav.Item>
@@ -106,17 +98,17 @@ const AdminMode = ({ auth }) => {
 
                     <div className={styles.main}>
                         {page === 'seasons' && (
-                            <SeasonEdit userId={auth.currentUser?.uid} />
+                            <SeasonEdit userId={currentUser?.uid} />
                         )}
                         {page === 'teachers' && (
                             <TeacherList
-                                userId={auth.currentUser?.uid}
+                                userId={currentUser?.uid}
                                 setActiveChat={setActiveChat}
                             />
                         )}
                         {page === 'students' && (
                             <StudentList
-                                userId={auth.currentUser?.uid}
+                                userId={currentUser?.uid}
                                 setActiveChat={setActiveChat}
                             />
                         )}
@@ -124,7 +116,7 @@ const AdminMode = ({ auth }) => {
                     <ChatList
                         activeChat={activeChat}
                         setActiveChat={setActiveChat}
-                        userId={auth.currentUser?.uid}
+                        userId={currentUser?.uid}
                         mode={TYPES.ADMIN}
                     />
                 </>

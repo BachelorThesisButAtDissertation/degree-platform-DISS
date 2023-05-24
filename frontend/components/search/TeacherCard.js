@@ -39,6 +39,8 @@ const TeacherCard = (props) => {
         adminView,
         mode,
     } = props;
+
+    console.log('canRequest ------------------->> ', canRequest, available);
     const [open, setOpen] = useState(false);
     const [requestData, setRequestData] = useState({
         message: '',

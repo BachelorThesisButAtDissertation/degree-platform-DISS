@@ -16,7 +16,7 @@ import MyRequests from '../student/MyRequests';
 import MyCollabs from '../student/MyCollaboration';
 import { useRouter } from 'next/router'
 
-const StudentMode = ({ auth }) => {
+const StudentMode = ({ currentUser }) => {
     const [setupMode, setSetupMode] = useState('unset');
     const [page, setPage] = useState('explore');
     const [activeChat, setActiveChat] = useState();
@@ -33,14 +33,14 @@ const StudentMode = ({ auth }) => {
         <div className={styles.container}>
             {setupMode === 'unset' && (
                 <AccountLoader
-                    userId={auth.currentUser?.uid}
+                    userId={currentUser?.uid}
                     setAccountSetup={setAccountSetup}
                     mode='students'
                 />
             )}
             {setupMode === 'setting' && (
                 <SetupUser
-                    userId={auth?.currentUser?.uid}
+                    userId={currentUser?.uid}
                     endSetupMode={endSetupMode}
                 />
             )}
@@ -63,7 +63,9 @@ const StudentMode = ({ auth }) => {
                                 >
                                     <Nav.Item
                                         style={{
-                                            padding: 12,
+                                            padding: "12px 20px",
+                                            cursor: "default",
+                                            marginBottom: 32,
                                         }}
                                     >
                                         <img src='/logo.png' height='40' />
@@ -71,7 +73,7 @@ const StudentMode = ({ auth }) => {
                                     <Nav.Item icon={<AdminIcon />}>
                                         Welcome,{' '}
                                         {
-                                            auth?.currentUser?.providerData[0]
+                                            currentUser?.providerData[0]
                                                 .displayName
                                         }
                                     </Nav.Item>
@@ -111,23 +113,23 @@ const StudentMode = ({ auth }) => {
                             <TeacherList
                                 activeChat={activeChat}
                                 setActiveChat={setActiveChat}
-                                userId={auth.currentUser?.uid}
+                                userId={currentUser?.uid}
                             />
                         )}
                         {page === 'requests' && (
-                            <MyRequests userId={auth.currentUser?.uid} />
+                            <MyRequests userId={currentUser?.uid} />
                         )}
                         {page === 'collaborations' && (
                             <MyCollabs
                                 setActiveChat={setActiveChat}
-                                userId={auth.currentUser?.uid}
+                                userId={currentUser?.uid}
                             />
                         )}
                     </div>
                     <ChatList
                         activeChat={activeChat}
                         setActiveChat={setActiveChat}
-                        userId={auth.currentUser?.uid}
+                        userId={currentUser?.uid}
                     />
                 </>
             )}
