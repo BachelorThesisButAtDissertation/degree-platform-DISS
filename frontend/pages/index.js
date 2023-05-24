@@ -24,7 +24,6 @@ const Home = (props) => {
         })
     }, []);
 
-    console.log('SPER CA MERGE');
 
     return (
         <>
