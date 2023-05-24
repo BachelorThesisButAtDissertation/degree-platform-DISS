@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container .options {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.container .options button {
+    width: 100%;
+}
+
+.container .loginForm {
+    margin-top: 20px;
+}

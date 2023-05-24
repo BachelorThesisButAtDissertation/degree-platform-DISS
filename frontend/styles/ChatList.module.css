@@ -1,0 +1,97 @@
+.floatingButton {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    bottom: 0px;
+    right: 50px;
+}
+
+.floatingButton > button {
+    border-radius: 5px 5px 0px 0px;
+    margin-left: 5px;
+}
+
+.chatWindow {
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+    width: 320px;
+    height: 400px;
+    background-color: #f0f0f0;
+    margin-bottom: -15px;
+}
+.chatWindow .title {
+    background-color: var(--rs-sidenav-inverse-bg);
+    padding: 0px 0px 0px 10px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.chatWindow .chatWindowBody {
+    height: 300px;
+    overflow-y: scroll;
+    padding: 10px;
+}
+.chatWindow .chatWindowBody p {
+    border-radius: 0px 15px 15px 15px;
+    padding: 8px;
+    color: #ffffff;
+}
+.chatWindow .chatWindowBody p.received span {
+    color: #efefef;
+    display: block;
+    font-size: 12px;
+}
+.chatWindow .chatWindowBody p.sent span {
+    color: #818181;
+    display: block;
+    font-size: 12px;
+}
+.chatWindow .chatWindowBody p.received {
+    background-color: var(--rs-sidenav-inverse-bg);
+    margin-right: 25px;
+}
+.chatWindow .chatWindowBody p.sent {
+    background-color: #333333;
+    border-radius: 15px 0px 15px 15px;
+    margin-left: 25px;
+}
+
+.chatLine {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+}
+.chatLine .photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #333333;
+    margin-right: 10px;
+}
+.chatLine .photo img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.chatLine h3 {
+    font-size: 16px;
+}
+.chatLine:hover {
+    background-color: #f0f0f0;
+}
+
+.form {
+    padding: 0px 5px;
+    height: 36px !important;
+}

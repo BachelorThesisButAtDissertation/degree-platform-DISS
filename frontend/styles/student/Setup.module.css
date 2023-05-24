@@ -1,0 +1,19 @@
+.pageTitle {
+    margin-bottom: 20px;
+    padding: 40px 50px;
+}
+
+.container {
+    position: fixed;
+    width: 100vw;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex: content;
+    align-items: center;
+    justify-content: center;
+}
+
+.uploadButton {
+    padding: 20px 0px;
+}

@@ -1,0 +1,33 @@
+.container {
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.container .sidebarWrap {
+    width: 240px;
+    height: 100%;
+}
+.container .sidebarWrap .sidenav {
+    height: 100%;
+    z-index: 20;
+}
+
+.container .main {
+    overflow-y: scroll;
+    width: calc(100% - 240px);
+    padding: 2.5em 2em;
+    height: 100vh;
+}
+.container .main .teacherCardList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.container .main .teacherCardList > div {
+    margin: 10px;
+}
+.container .main .pageTitle {
+    margin-bottom: 20px;
+}
