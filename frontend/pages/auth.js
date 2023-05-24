@@ -97,6 +97,10 @@ const AuthPage = () => {
                 })
                     .then(() => console.log('heree'))
                     .catch(console.error);
+
+                setRegisterForm(false);
+                setLoginMode();
+
                 router.push({
                     pathname: '/auth',
                 });
