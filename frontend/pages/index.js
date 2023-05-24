@@ -24,6 +24,8 @@ const Home = (props) => {
         })
     }, []);
 
+    console.log('SPER CA MERGE');
+
     return (
         <>
             {mode === LoginOptions.STUDENT && <StudentMode currentUser={currentUser} />}
