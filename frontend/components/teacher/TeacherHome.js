@@ -17,6 +17,7 @@ import SetupTeacher from './SetupTeacher';
 import ListOfCollabs from './ListOfCollabs';
 import { TYPES } from '../../lib/user/userFunc';
 import { useRouter } from 'next/router'
+import ExitIcon from "@rsuite/icons/Exit";
 
 const TeacherMode = ({ auth }) => {
     const [setupMode, setSetupMode] = useState('unset');
@@ -64,13 +65,17 @@ const TeacherMode = ({ auth }) => {
                                     }}
                                 >
                                     <Nav.Item
-                                        style={{
-                                            padding: 12,
-                                        }}
+                                      style={{
+                                          padding: "12px 20px",
+                                          cursor: "default",
+                                          marginBottom: 32,
+                                          backgroundColor: "white",
+                                          border: '5px solid #2962FF',
+                                      }}
                                     >
                                         <img src='/logo.png' height='40' />
                                     </Nav.Item>
-                                    <Nav.Item icon={<AdminIcon />}>
+                                    <Nav.Item icon={<AdminIcon />} style={{ backgroundColor: "#2962FF",}}>
                                         Welcome,{' '}
                                         {
                                             auth?.currentUser?.providerData[0]
@@ -80,17 +85,21 @@ const TeacherMode = ({ auth }) => {
                                     <Nav.Item
                                         eventKey='requests'
                                         icon={<DocPassIcon />}
+                                        style={{ backgroundColor: "#2962FF",}}
                                     >
                                         Requests
                                     </Nav.Item>
                                     <Nav.Item
                                         eventKey='collaborations'
                                         icon={<DocPassIcon />}
+                                        style={{ backgroundColor: "#2962FF",}}
                                     >
                                         Collaborations
                                     </Nav.Item>
                                     <Nav.Item
                                         eventKey='logout'
+                                        icon={<ExitIcon />}
+                                        style={{ backgroundColor: "#2962FF",}}
                                     >
                                         Logout
                                     </Nav.Item>

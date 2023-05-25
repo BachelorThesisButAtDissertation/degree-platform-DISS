@@ -6,6 +6,7 @@ import DashboardIcon from '@rsuite/icons/Dashboard';
 import PeoplesIcon from '@rsuite/icons/Peoples';
 import AdminIcon from '@rsuite/icons/Admin';
 import DocPassIcon from '@rsuite/icons/DocPass';
+import ExitIcon from '@rsuite/icons/Exit';
 
 import TeacherCard from '../search/TeacherCard';
 import TeacherList from '../search/TeacherList';
@@ -53,7 +54,7 @@ const StudentMode = ({ currentUser }) => {
                             className={styles.sidenav}
                             appearance='inverse'
                         >
-                            <Sidenav.Body>
+                            <Sidenav.Body style={{ backgroundColor: "#2962FF",}}>
                                 <Nav
                                     activeKey={page}
                                     onSelect={(page) => {
@@ -66,11 +67,13 @@ const StudentMode = ({ currentUser }) => {
                                             padding: "12px 20px",
                                             cursor: "default",
                                             marginBottom: 32,
+                                            backgroundColor: "white",
+                                            border: '5px solid #2962FF',
                                         }}
                                     >
                                         <img src='/logo.png' height='40' />
                                     </Nav.Item>
-                                    <Nav.Item icon={<AdminIcon />}>
+                                    <Nav.Item icon={<AdminIcon />} style={{ backgroundColor: "#2962FF",}}>
                                         Welcome,{' '}
                                         {
                                             currentUser?.providerData[0]
@@ -80,23 +83,28 @@ const StudentMode = ({ currentUser }) => {
                                     <Nav.Item
                                         eventKey='explore'
                                         icon={<DashboardIcon />}
+                                        style={{ backgroundColor: "#2962FF",}}
                                     >
                                         Explore
                                     </Nav.Item>
                                     <Nav.Item
                                         eventKey='requests'
                                         icon={<DocPassIcon />}
+                                        style={{ backgroundColor: "#2962FF",}}
                                     >
                                         Requests
                                     </Nav.Item>
                                     <Nav.Item
                                         eventKey='collaborations'
                                         icon={<DocPassIcon />}
+                                        style={{ backgroundColor: "#2962FF",}}
                                     >
                                         Collaborations
                                     </Nav.Item>
                                     <Nav.Item
                                         eventKey='logout'
+                                        icon={<ExitIcon />}
+                                        style={{ backgroundColor: "#2962FF" }}
                                     >
                                         Logout
                                     </Nav.Item>

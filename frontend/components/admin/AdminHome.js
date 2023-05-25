@@ -14,6 +14,7 @@ import TeacherList from './TeacherList';
 import StudentList from './StudentList';
 import { TYPES } from '../../lib/user/userFunc';
 import { useRouter } from 'next/router'
+import ExitIcon from "@rsuite/icons/Exit";
 
 const AdminMode = ({ currentUser }) => {
     const [setupMode, setSetupMode] = useState('unset');
@@ -55,13 +56,17 @@ const AdminMode = ({ currentUser }) => {
                                     }}
                                 >
                                     <Nav.Item
-                                        style={{
-                                            padding: 12,
-                                        }}
+                                      style={{
+                                          padding: "12px 20px",
+                                          cursor: "default",
+                                          marginBottom: 32,
+                                          backgroundColor: "white",
+                                          border: '5px solid #2962FF',
+                                      }}
                                     >
                                         <img src='/logo.png' height='40' />
                                     </Nav.Item>
-                                    <Nav.Item icon={<AdminIcon />}>
+                                    <Nav.Item icon={<AdminIcon />} style={{ backgroundColor: "#2962FF",}}>
                                         Welcome{' '}
                                         {
                                             currentUser?.providerData[0]
@@ -71,23 +76,28 @@ const AdminMode = ({ currentUser }) => {
                                     <Nav.Item
                                         eventKey='seasons'
                                         icon={<CalendarIcon />}
+                                        style={{ backgroundColor: "#2962FF",}}
                                     >
                                         Seasons
                                     </Nav.Item>
                                     <Nav.Item
                                         eventKey='teachers'
                                         icon={<DocPassIcon />}
+                                        style={{ backgroundColor: "#2962FF",}}
                                     >
                                         Teachers
                                     </Nav.Item>
                                     <Nav.Item
                                         eventKey='students'
                                         icon={<PeoplesIcon />}
+                                        style={{ backgroundColor: "#2962FF",}}
                                     >
                                         Students
                                     </Nav.Item>
                                     <Nav.Item
                                         eventKey='logout'
+                                        icon={<ExitIcon />}
+                                        style={{ backgroundColor: "#2962FF",}}
                                     >
                                         Logout
                                     </Nav.Item>

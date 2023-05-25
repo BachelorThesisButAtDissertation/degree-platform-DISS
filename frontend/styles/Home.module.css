@@ -12,6 +12,11 @@
 .container .sidebarWrap .sidenav {
     height: 100%;
     z-index: 20;
+    background-color: #2962FF;
+}
+
+.container .sidebarWrap .sidenav .link {
+    background-color: #2962FF;
 }
 
 .container .main {
