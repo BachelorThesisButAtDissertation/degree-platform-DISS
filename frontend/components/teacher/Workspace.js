@@ -22,6 +22,12 @@ import Textarea from '../basics/Textarea';
 import ArowBackIcon from '@rsuite/icons/ArowBack';
 import { downloadAtURL, getFile } from '../../lib/storage/storageFunc';
 
+const DateCell = ({ rowData, dataKey, ...props }) => (
+    <Table.Cell {...props}>
+        {isNaN(rowData[dataKey]) ? '-' : new Date(rowData[dataKey]).toDateString()}
+    </Table.Cell>
+  );
+
 const Workspace = ({ collab, userId, setActiveChat, closeWorkspace }) => {
     const [tasks, setTasks] = useState([]);
     const [taskModal, setTaskModal] = useState(false);
@@ -242,7 +248,7 @@ const Workspace = ({ collab, userId, setActiveChat, closeWorkspace }) => {
 
                 <Table.Column width={150}>
                     <Table.HeaderCell>Completed on</Table.HeaderCell>
-                    <Table.Cell dataKey='completed' />
+                    <DateCell dataKey='completedOn'/>
                 </Table.Column>
 
                 <Table.Column width={100}>
