@@ -203,7 +203,7 @@ const Workspace = ({ collab, userId, setActiveChat, closeWorkspace }) => {
                     {file && (
                         <Button
                             appearance='primary'
-                            color='red'
+                            color='violet'
                             onClick={() => downloadFile()}
                         >
                             Download latest version

@@ -11,6 +11,7 @@ import { getMyChats, TYPES } from '../../lib/user/userFunc';
 import { getDocByRef } from '../../lib/utils';
 import styles from '../../styles/ChatList.module.css';
 import Chat from './Chat';
+import {getImageURL} from "../../lib/storage/storageFunc";
 
 const ChatList = ({ userId, setActiveChat, activeChat, mode }) => {
     const [size, setSize] = useState('xs');
@@ -34,9 +35,16 @@ const ChatList = ({ userId, setActiveChat, activeChat, mode }) => {
                 await getDocByRef(chat.chatters[1]),
             ];
 
+            const to = chatters.find((c) => c.id !== userId);
+
+            const photoURL = to.photo ?  await getImageURL(to.id, to.photo) : '/userAvatar.svg';
+
             postList.push({
                 id: chat.id,
-                to: chatters.find((c) => c.id !== userId),
+                to: {
+                    ...to,
+                    photoURL,
+                },
             });
 
             console.log(postList);

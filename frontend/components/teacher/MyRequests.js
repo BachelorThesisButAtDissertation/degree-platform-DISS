@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Table, toaster, Message } from 'rsuite';
+import {Table, toaster, Message} from 'rsuite';
 import {
     createCollaboration,
     getMyTeacherRequests,
@@ -37,8 +37,8 @@ const ActionCell = ({ rowData, callBack }) => {
     };
     return (
         <span>
-            <a onClick={() => handleAction('ACCEPTED')}> Accept </a> |{' '}
-            <a onClick={() => handleAction('REJECTED')}> Reject </a>
+            <a onClick={() => handleAction('ACCEPTED')} style={{ cursor: "pointer"}}> Accept </a> |{' '}
+            <a onClick={() => handleAction('REJECTED')} style={{ cursor: "pointer"}}> Reject </a>
         </span>
     );
 };

@@ -1,18 +1,14 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { Nav, Sidenav } from 'rsuite';
 import styles from '../../styles/Home.module.css';
-import DashboardIcon from '@rsuite/icons/Dashboard';
-import PeoplesIcon from '@rsuite/icons/Peoples';
 import AdminIcon from '@rsuite/icons/Admin';
 import DocPassIcon from '@rsuite/icons/DocPass';
 
-import TeacherCard from '../search/TeacherCard';
 import TeacherList from '../search/TeacherList';
 import ChatList from '../chat/ChatList';
 
 import AccountLoader from '../AccountLoader';
 import MyRequests from '../teacher/MyRequests';
-import MyCollabs from '../student/MyCollaboration';
 import SetupTeacher from './SetupTeacher';
 import ListOfCollabs from './ListOfCollabs';
 import { TYPES } from '../../lib/user/userFunc';
