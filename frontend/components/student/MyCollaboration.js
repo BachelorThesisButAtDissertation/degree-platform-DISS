@@ -112,17 +112,23 @@ const MyCollabs = ({ userId, setActiveChat }) => {
         <>
             <div className={'pageTitle'}>
                 <h2>{collab?.title || 'My Requests'}</h2>
-                <p>
-                    Coordinator:{' '}
-                    <strong>{collab?.coordinator.displayName}</strong>.
-                </p>
-                <Button
-                    appearance='primary'
-                    color='green'
-                    onClick={() => openNewChat()}
-                >
-                    Open chat
-                </Button>
+                {
+                    collab && collab.coordinator && (
+                   <>
+                       <p>
+                           Coordinator:{' '}
+                           <strong>{collab?.coordinator.displayName}</strong>.
+                       </p>
+                       <Button
+                         appearance='primary'
+                         color='green'
+                         onClick={() => openNewChat()}
+                       >
+                           Open chat
+                       </Button>
+                   </>
+                  )
+                }
             </div>
 
             <Table
@@ -164,36 +170,40 @@ const MyCollabs = ({ userId, setActiveChat }) => {
                 </Table.Column>
             </Table>
 
-            <div>
-                <h5>Upload your latest version</h5>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flex-start',
-                    }}
-                >
-                    {file.status !== 'uploading' && (
-                        <Uploader
+            {
+              collab && collab.id && (
+                <div>
+                    <h5>Upload your latest version</h5>
+                    <div
+                      style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'flex-start',
+                      }}
+                    >
+                        {file.status !== 'uploading' && (
+                          <Uploader
                             multiple
                             listType='picture'
                             action=''
                             onUpload={uploadFile}
                             style={{ marginBottom: 10 }}
-                        >
-                            <button>
-                                <FileUploadIcon />
-                            </button>
-                        </Uploader>
-                    )}
-                    {file.status === 'uploading' && <Loader size='lg' />}
-                    {file.status === 'done' && (
-                        <Button appearance='primary' onClick={downloadFile}>
-                            Download {file.file.name}
-                        </Button>
-                    )}
+                          >
+                              <button>
+                                  <FileUploadIcon />
+                              </button>
+                          </Uploader>
+                        )}
+                        {file.status === 'uploading' && <Loader size='lg' />}
+                        {file.status === 'done' && (
+                          <Button appearance='primary' onClick={downloadFile}>
+                              Download {file.file.name}
+                          </Button>
+                        )}
+                    </div>
                 </div>
-            </div>
+              )
+            }
         </>
     );
 };
