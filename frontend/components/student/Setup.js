@@ -90,17 +90,20 @@ const SetupUser = ({ userId, endSetupMode }) => {
                             fileListVisible={false}
                             listType='picture'
                             action=''
-                            className={'imageBoxUploader'}
-                            onSelect={handleProfilePicture}
-                            accept='application/pdf, image/png, image/jpeg'
+                            onUpload={handleProfilePicture}
+                            accept='image/png, image/jpeg'
                         >
                             <div>
                                 {uploading && <Loader backdrop center />}
                                 {fdata.photo ? (
                                     <img
                                         src={fdata.photo[0].url}
-                                        width='100%'
-                                        height='100%'
+                                        style={{
+                                            maxWidth: "100%",
+                                            maxHeight: "100%",
+                                            height: 'auto',
+                                            width: 'auto'
+                                        }}
                                     />
                                 ) : (
                                     <ImageIcon />

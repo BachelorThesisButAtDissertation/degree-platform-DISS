@@ -92,7 +92,6 @@ const SetupTeacher = ({ userId, endSetupMode }) => {
                             fileListVisible={false}
                             listType='picture'
                             action=''
-                            className={'imageBoxUploader'}
                             onUpload={handleProfilePicture}
                             accept='image/png, image/jpeg'
                         >

@@ -10,6 +10,7 @@ import {
     Checkbox,
     ButtonToolbar,
     ButtonGroup,
+    InputNumber,
 } from 'rsuite';
 import { openChat } from '../../lib/chat/chatFunc';
 import {
@@ -28,9 +29,22 @@ const DateCell = ({ rowData, dataKey, ...props }) => (
     </Table.Cell>
   );
 
+const StatusCell = ({ rowData, dataKey, ...props }) => {
+    return (
+      <Table.Cell {...props}>
+          {rowData.feedback || rowData.done}
+      </Table.Cell>
+    )
+};
+
+
 const Workspace = ({ collab, userId, setActiveChat, closeWorkspace }) => {
     const [tasks, setTasks] = useState([]);
     const [taskModal, setTaskModal] = useState(false);
+
+    const [clickedTask, setClickedTask] = useState({});
+    const [addGradeModal, setAddGradeModal] = useState(false);
+
     const [titleEdit, setTitleEdit] = useState(false);
     const [title, setTitle] = useState(collab.title);
     const [file, setFile] = useState();
@@ -39,6 +53,10 @@ const Workspace = ({ collab, userId, setActiveChat, closeWorkspace }) => {
         body: '',
         dueDate: null,
     });
+    const [gradeData, setGradeData] = useState({
+        grade: 0,
+        feedback: '',
+    })
     const loadData = async () => {
         await loadTasks(collab.id);
     };
@@ -90,12 +108,13 @@ const Workspace = ({ collab, userId, setActiveChat, closeWorkspace }) => {
         await loadTasks(collab.id);
     };
 
-    const markAsDone = async (tid, val) => {
-        await markTaskAsDone(collab.id, tid, val);
+    const markAsDone = async () => {
+        await markTaskAsDone(collab.id, clickedTask.id, gradeData.feedback, gradeData.grade);
         toaster.push(<Message type='success'>Task has been updated.</Message>);
         setTimeout(() => {
             loadTasks(collab.id);
         }, 500);
+        setAddGradeModal(false);
     };
 
     const saveNewTitle = () => {
@@ -182,6 +201,46 @@ const Workspace = ({ collab, userId, setActiveChat, closeWorkspace }) => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <Modal
+              size={'sm'}
+              open={addGradeModal}
+              onClose={() => setAddGradeModal(false)}
+            >
+                <Modal.Header>
+                    <Modal.Title>{`Add a grade to the task "${clickedTask.title}"`}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form onChange={setGradeData} formValue={gradeData}>
+                        <Form.Group controlId='feedback'>
+                            <Form.ControlLabel>
+                                Task feedback
+                            </Form.ControlLabel>
+                            <Form.Control
+                              rows={5}
+                              name='feedback'
+                              accepter={Textarea}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId='grade'>
+                            <Form.ControlLabel>Grade</Form.ControlLabel>
+                            <Form.Control name='grade' accepter={InputNumber} max={10} min={1}/>
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                      onClick={() => {
+                          setAddGradeModal(false);
+                      }}
+                      appearance='subtle'
+                    >
+                        Cancel
+                    </Button>
+                    <Button onClick={markAsDone} appearance='primary'>
+                        Save
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
             <ButtonToolbar
                 style={{
@@ -226,17 +285,17 @@ const Workspace = ({ collab, userId, setActiveChat, closeWorkspace }) => {
                     console.log(data);
                 }}
             >
-                <Table.Column width={190} align='center' fixed>
-                    <Table.HeaderCell>Task Id</Table.HeaderCell>
-                    <Table.Cell dataKey='id' />
-                </Table.Column>
+                {/*<Table.Column width={190} align='center' fixed>*/}
+                {/*    <Table.HeaderCell>Task Id</Table.HeaderCell>*/}
+                {/*    <Table.Cell dataKey='id' />*/}
+                {/*</Table.Column>*/}
 
                 <Table.Column width={220}>
                     <Table.HeaderCell>Title</Table.HeaderCell>
                     <Table.Cell dataKey='title' />
                 </Table.Column>
 
-                <Table.Column width={450}>
+                <Table.Column width={350}>
                     <Table.HeaderCell>Body</Table.HeaderCell>
                     <Table.Cell dataKey='body' />
                 </Table.Column>
@@ -251,23 +310,28 @@ const Workspace = ({ collab, userId, setActiveChat, closeWorkspace }) => {
                     <DateCell dataKey='completedOn'/>
                 </Table.Column>
 
-                <Table.Column width={100}>
+                <Table.Column width={350}>
                     <Table.HeaderCell>Status</Table.HeaderCell>
-                    <Table.Cell dataKey='done' />
+                    <StatusCell dataKey='done' />
                 </Table.Column>
 
-                <Table.Column width={100}>
-                    <Table.HeaderCell>Action</Table.HeaderCell>
+                <Table.Column width={120}>
+                    <Table.HeaderCell>Grade / Action</Table.HeaderCell>
                     <Table.Cell>
                         {(rowData) => (
-                            <Checkbox
-                                checked={rowData.status}
-                                onChange={(_, val) =>
-                                    markAsDone(rowData.id, val)
-                                }
-                            >
-                                Done
-                            </Checkbox>
+                           !rowData.status ? (
+                             <Checkbox
+                               checked={rowData.status}
+                               onChange={(_, val) => {
+                                   setClickedTask(rowData);
+                                   setAddGradeModal(true);
+                               }}
+                             >
+                                 Done
+                             </Checkbox>
+                           ) : (
+                            rowData.grade > 0 ? rowData.grade : '-'
+                           )
                         )}
                     </Table.Cell>
                 </Table.Column>

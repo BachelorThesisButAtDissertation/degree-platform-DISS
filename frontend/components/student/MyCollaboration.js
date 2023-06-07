@@ -4,12 +4,27 @@ import { getTeacherDataByRef } from '../../lib/db/teacherDB';
 import {
     getCollabTasks,
     getMyCollabsStud,
-    getMyStudentRequests,
     uploadCollabFile,
 } from '../../lib/user/userFunc';
 import FileUploadIcon from '@rsuite/icons/FileUpload';
 import { downloadAtURL, getFile } from '../../lib/storage/storageFunc';
 import { openChat } from '../../lib/chat/chatFunc';
+
+const StatusCell = ({ rowData, dataKey, ...props }) => {
+    return (
+      <Table.Cell {...props}>
+          {rowData.feedback || rowData.done}
+      </Table.Cell>
+    )
+};
+
+const GradeCell = ({ rowData, dataKey, ...props }) => {
+    return (
+      <Table.Cell {...props}>
+          {rowData.grade && rowData.grade > 0 ? rowData.grade : '-'}
+      </Table.Cell>
+    )
+};
 
 const MyCollabs = ({ userId, setActiveChat }) => {
     const [tasks, setTasks] = useState([]);
@@ -118,29 +133,34 @@ const MyCollabs = ({ userId, setActiveChat }) => {
                     console.log(data);
                 }}
             >
-                <Table.Column width={190} align='center' fixed>
-                    <Table.HeaderCell>Task Id</Table.HeaderCell>
-                    <Table.Cell dataKey='id' />
-                </Table.Column>
+                {/*<Table.Column width={190} align='center' fixed>*/}
+                {/*    <Table.HeaderCell>Task Id</Table.HeaderCell>*/}
+                {/*    <Table.Cell dataKey='id' />*/}
+                {/*</Table.Column>*/}
 
                 <Table.Column width={220}>
                     <Table.HeaderCell>Title</Table.HeaderCell>
                     <Table.Cell dataKey='title' />
                 </Table.Column>
 
-                <Table.Column width={450}>
+                <Table.Column width={350}>
                     <Table.HeaderCell>Body</Table.HeaderCell>
                     <Table.Cell dataKey='body' />
                 </Table.Column>
 
-                <Table.Column width={130}>
+                <Table.Column width={150}>
                     <Table.HeaderCell>Due date</Table.HeaderCell>
                     <Table.Cell dataKey='dueDate' />
                 </Table.Column>
 
-                <Table.Column width={100}>
-                    <Table.HeaderCell>Status</Table.HeaderCell>
-                    <Table.Cell dataKey='done' />
+                <Table.Column width={350}>
+                    <Table.HeaderCell>Status/Feedback</Table.HeaderCell>
+                    <StatusCell dataKey='done' />
+                </Table.Column>
+
+                <Table.Column width={120}>
+                    <Table.HeaderCell>Grade</Table.HeaderCell>
+                    <GradeCell dataKey='grade' />
                 </Table.Column>
             </Table>
 

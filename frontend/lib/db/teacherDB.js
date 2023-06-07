@@ -131,13 +131,15 @@ export const createCollaborationTask = (colId, task) => {
     });
 };
 
-export const markTaskAsDone = (colId, taskId, done) => {
+export const markTaskAsDone = (colId, taskId, feedback, grade) => {
     const taskRef = doc(db, `collaborations/${colId}/tasks`, taskId);
     setDoc(
         taskRef,
         {
-            status: done,
+            status: true,
             completedOn: Date.now(),
+            feedback,
+            grade,
         },
         { merge: true }
     );
