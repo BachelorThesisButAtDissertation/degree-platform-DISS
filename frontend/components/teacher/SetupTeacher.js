@@ -65,6 +65,7 @@ const SetupTeacher = ({ userId, endSetupMode }) => {
             ...fdata,
             photo: fdata.photo?.[0].name,
             requests: 3,
+            available: true,
         });
         localStorage.setItem('userData', JSON.stringify(fdata));
         endSetupMode();
